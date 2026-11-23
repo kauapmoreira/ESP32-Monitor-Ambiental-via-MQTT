@@ -7,7 +7,7 @@ Projeto em ESP32 para leitura de **temperatura**, **umidade** e **luminosidade**
 ## ⚙️ Funcionalidades
 
 - **Leitura de Sensores:** Coleta temperatura (°C) e umidade (%) com o sensor **DHT22**, além da luminosidade em porcentagem (0% a 100%) usando um **LDR**.
-- **Publicação via MQTT:** Envia os dados estruturados em JSON para o broker `broker.emqx.io` sob demanda (ao digitar qualquer comando no Monitor Serial dentro do ciclo de 3 segundos).
+- **Publicação via MQTT:** Envia os dados estruturados em JSON para o broker `broker.emqx.io` sob demanda (ao enviar qualquer texto no Monitor Serial dentro do ciclo de 3 segundos).
 - **Recepção e Decodificação:** Escuta um tópico MQTT dedicado, recebe payloads JSON de outros ESPs e exibe os dados decodificados no Monitor Serial.
 - **Reconexão Automática:** Mantém a conexão Wi-Fi e MQTT ativa continuamente.
 
@@ -19,6 +19,16 @@ Projeto em ESP32 para leitura de **temperatura**, **umidade** e **luminosidade**
 | :--- | :--- | :--- |
 | **Sensor DHT22** | GPIO `4` | Digital |
 | **Sensor LDR** | GPIO `32` | Analógico (`0–4095` mapeado para `0–100%`) |
+
+---
+
+## 📚 Bibliotecas Utilizadas
+
+- **PubSubClient** (comunicação MQTT)
+- **ArduinoJson** (v7+ para serialização e desserialização JSON)
+- **DHT sensor library** (leitura do DHT22)
+
+> **Nota:** As funções de conexão e reconexão Wi-Fi (`conexaoWifi()` e `reconexaoWifi()`) estão separadas no arquivo auxiliar `internet.h`.
 
 ---
 
