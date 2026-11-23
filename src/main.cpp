@@ -51,8 +51,8 @@ void loop()
   if (tempoAtual - tempoAnterior >= intervaloEnvio)
   {
     tempoAnterior = tempoAtual;
-    float tempC = 25.0; // medidor.readTemperature();
-    float umi = 50.0;   // medidor.readHumidity();
+    float tempC = medidor.readTemperature();
+    float umi = medidor.readHumidity();
 
     int leituraLDR = analogRead(pinLDR);
     int luminosidade = map(leituraLDR, 0, 4095, 0, 100);
@@ -136,11 +136,18 @@ void retornoMqtt(char *topic, byte *payload, unsigned int lenght)
 
   //------------------acessar os campos do JSON
   const char *dispositivo = doc["disp"];
-  const char *tempC = doc["temp"];
-  const char *umi = doc["umidade"];
+  float tempC = doc["temp"];
+  float umi = doc["umidade"];
+  int lum = doc["luminosidade"];
   Serial.println("dados decodificados");
   Serial.print("esp: ");
   Serial.println(dispositivo);
+  Serial.print("Temp: ");
+  Serial.println(tempC);
+  Serial.print("Umidade: ");
+  Serial.println(umi);
+  Serial.print("Luminosidade: ");
+  Serial.println(lum);
 
   Serial.println("-------------------------------");
 }
